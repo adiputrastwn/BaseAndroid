@@ -9,6 +9,9 @@ pluginManagement {
             if(requested.id.id == 'dagger.hilt.android.plugin') {
                 useModule("com.google.dagger:hilt-android-gradle-plugin:${requested.version}")
             }
+            if (requested.id.id == "kotlinx-serialization") {
+                useModule("org.jetbrains.kotlin:kotlin-serialization:${requested.version}")
+            }
         }
     }
 }
@@ -21,3 +24,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BaseAndroid"
 include ':app'
+include ':core-android'
