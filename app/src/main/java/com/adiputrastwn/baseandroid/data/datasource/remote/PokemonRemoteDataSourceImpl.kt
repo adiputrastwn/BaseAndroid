@@ -1,6 +1,7 @@
 package com.adiputrastwn.baseandroid.data.datasource.remote
 
 import com.adiputrastwn.baseandroid.data.datasource.remote.helper.safeNetworkCall
+import com.adiputrastwn.baseandroid.data.datasource.remote.model.PokemonDetail
 import com.adiputrastwn.baseandroid.domain.entity.Pokemon
 import com.adiputrastwn.coreandroid.exception.Failure
 import com.adiputrastwn.coreandroid.functional.Either
@@ -23,6 +24,14 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
                     response
                 }
             }
+        } else {
+            Either.Left(Failure.NetworkConnection)
+        }
+    }
+
+    override suspend fun getPokemonDetail(name: String): Either<Failure, PokemonDetail> {
+        return if (networkHandler.isNetworkAvailable()) {
+            return safeNetworkCall { apiService.getPokemonDetail(name) }
         } else {
             Either.Left(Failure.NetworkConnection)
         }
