@@ -43,10 +43,10 @@ class PokemonListFragment : Fragment() {
             addItemDecoration(GridSpacesItemDecoration(spacingInPixels, spanCount, true))
         }
         mainViewModel.pokemonList.observe(viewLifecycleOwner) {
-            it.forEach { pokemon ->
+            it?.forEach { pokemon ->
                 println(pokemon.name)
             }
-            pokemonAdapter.pokemonList = it
+            pokemonAdapter.pokemonList = it ?: emptyList()
             pokemonAdapter.notifyDataSetChanged()
 
         }

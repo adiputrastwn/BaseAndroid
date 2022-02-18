@@ -13,21 +13,17 @@ class MainViewModel @Inject constructor(
     private val pokemonRepo: PokemonRepositoryImpl
 ) : ViewModel() {
 
-    var pokemonList = MutableLiveData<List<Pokemon>>()
+    var pokemonList = MutableLiveData<List<Pokemon>?>()
 
     fun getPokemonList() = viewModelScope.launch {
         when (val pokemonDataResponse = pokemonRepo.getPokemonList()) {
             is Either.Left -> print(pokemonDataResponse.a)
             is Either.Right -> {
-                pokemonList.postValue(pokemonDataResponse.b ?: emptyList())
+                pokemonList.postValue(pokemonDataResponse.b)
                 pokemonDataResponse.b.forEach {
                     println(it.getImageUrl())
                 }
             }
         }
-    }
-
-    fun getPokemonDetail(name: String) = viewModelScope.launch {
-        val pokemonData = pokemonRepo.getPokemonDetail(name)
     }
 }
