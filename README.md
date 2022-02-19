@@ -5,6 +5,7 @@
 - AndroidX
 - Coroutine
 - Retrofit(OkHttp)
+- Paging 3
 - Hilt
 - Glide
 - Fastlane
