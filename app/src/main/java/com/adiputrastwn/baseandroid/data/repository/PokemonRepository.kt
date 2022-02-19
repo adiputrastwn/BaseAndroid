@@ -7,5 +7,6 @@ import com.adiputrastwn.coreandroid.functional.Either
 
 interface PokemonRepository {
     suspend fun getPokemonList(): Either<Failure, List<Pokemon>>
+    suspend fun getPokemonList(offset: Int, loadSize: Int): Either<Failure, List<Pokemon>>
     suspend fun getPokemonDetail(name: String): Either<Failure, PokemonDetail>
 }

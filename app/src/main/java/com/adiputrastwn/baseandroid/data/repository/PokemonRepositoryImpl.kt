@@ -12,8 +12,16 @@ class PokemonRepositoryImpl @Inject constructor(
 ) : PokemonRepository {
 
     override suspend fun getPokemonList(): Either<Failure, List<Pokemon>> {
-        return pokemonRemoteData.getPokemonList()
+        return pokemonRemoteData.getPokemonList(0, 20)
     }
+
+    override suspend fun getPokemonList(
+        offset: Int,
+        loadSize: Int
+    ): Either<Failure, List<Pokemon>> {
+        return pokemonRemoteData.getPokemonList(offset, loadSize)
+    }
+
 
     override suspend fun getPokemonDetail(name: String): Either<Failure, PokemonDetail> {
         return pokemonRemoteData.getPokemonDetail(name)

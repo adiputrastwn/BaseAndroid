@@ -2,6 +2,7 @@ package com.adiputrastwn.baseandroid.di.module
 
 import com.adiputrastwn.baseandroid.BuildConfig
 import com.adiputrastwn.baseandroid.data.datasource.remote.ApiService
+import com.adiputrastwn.baseandroid.data.repository.PokemonRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -45,13 +46,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, json: Json, baseUrl: String): Retrofit = Retrofit.Builder()
-        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
-        .baseUrl(baseUrl)
-        .client(okHttpClient)
-        .build()
+    fun provideRetrofit(okHttpClient: OkHttpClient, json: Json, baseUrl: String): Retrofit =
+        Retrofit.Builder()
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .baseUrl(baseUrl)
+            .client(okHttpClient)
+            .build()
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiService::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 }

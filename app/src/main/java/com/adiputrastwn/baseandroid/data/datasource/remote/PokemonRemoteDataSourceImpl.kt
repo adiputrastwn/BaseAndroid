@@ -13,9 +13,9 @@ class PokemonRemoteDataSourceImpl @Inject constructor(
     private val networkHandler: NetworkHandler
 ) : PokemonRemoteDataSource {
 
-    override suspend fun getPokemonList(): Either<Failure, List<Pokemon>> {
+    override suspend fun getPokemonList(offset: Int, limit: Int): Either<Failure, List<Pokemon>> {
         return if (networkHandler.isNetworkAvailable()) {
-            when (val response = safeNetworkCall { apiService.getPokemonList(0, 20) }) {
+            when (val response = safeNetworkCall { apiService.getPokemonList(offset, limit) }) {
                 is Either.Right -> {
                     val pokemonList = response.b.results ?: emptyList()
                     Either.Right(pokemonList)
