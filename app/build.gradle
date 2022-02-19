@@ -49,6 +49,7 @@ dependencies {
     implementation "androidx.core:core-ktx:$versions.coreKtx"
     implementation "androidx.appcompat:appcompat:$versions.appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayoutVersion"
+    implementation "androidx.paging:paging-runtime:$versions.pagingVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.navigationVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutinesVersion"
