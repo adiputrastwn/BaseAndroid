@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.adiputrastwn.baseandroid.databinding.FragmentFirstBinding
 import com.adiputrastwn.baseandroid.ui.MainViewModel
-import com.adiputrastwn.baseandroid.ui.PokemonRecyclerViewAdapter
+import com.adiputrastwn.baseandroid.ui.PokemonPagingDataAdapter
 import com.adiputrastwn.coreandroid.ui.recyclerview.GridSpacesItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -26,31 +28,25 @@ class PokemonListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pokemonAdapter = PokemonRecyclerViewAdapter()
+        val pokemonPagingAdapter = PokemonPagingDataAdapter()
         binding.recyclerViewPokemon.apply {
             val spanCount = 2
             layoutManager = GridLayoutManager(requireContext(), spanCount)
-            adapter = pokemonAdapter
+            adapter = pokemonPagingAdapter
             val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing)
             addItemDecoration(GridSpacesItemDecoration(spacingInPixels, spanCount, true))
         }
-        mainViewModel.pokemonList.observe(viewLifecycleOwner) {
-            it.forEach { pokemon ->
-                println(pokemon.name)
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            mainViewModel.flow.collectLatest { pagingData ->
+                pokemonPagingAdapter.submitData(pagingData)
             }
-            pokemonAdapter.pokemonList = it
-            pokemonAdapter.notifyDataSetChanged()
-
         }
-        mainViewModel.getPokemonList()
     }
 
     override fun onDestroyView() {
