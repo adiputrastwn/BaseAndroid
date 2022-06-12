@@ -1,6 +1,5 @@
 package com.adiputrastwn.baseandroid.data.datasource.remote.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

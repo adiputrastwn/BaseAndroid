@@ -23,7 +23,7 @@ class PokemonPagingSource @Inject constructor(
             var nextPageNumber: Int? = null
             val response = pokemonRepo.getPokemonList(offset, params.loadSize)
             data.addAll(response.getOrElse(emptyList()))
-            if (!data.isNullOrEmpty()) {
+            if (data.isNotEmpty()) {
                 nextPageNumber = page + 1
             }
             LoadResult.Page(

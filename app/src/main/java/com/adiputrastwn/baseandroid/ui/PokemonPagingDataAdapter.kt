@@ -1,11 +1,9 @@
 package com.adiputrastwn.baseandroid.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.adiputrastwn.baseandroid.R
 import com.adiputrastwn.baseandroid.databinding.ItemViewPokemonBinding
 import com.adiputrastwn.baseandroid.domain.entity.Pokemon
 
