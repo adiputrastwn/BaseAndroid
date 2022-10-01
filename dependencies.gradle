@@ -1,14 +1,14 @@
 ext.versions = [
         minSdk                      : 21,
-        compileSdk                  : 32,
+        compileSdk                  : 33,
         versionCode                 : 1,
         versionName                 : '1.0',
 
         // kotlin
-        kotlin                      : '1.6.10',
+        kotlin                      : '1.7.20',
 
-        coreKtx                     : '1.8.0',
-        appCompatVersion            : '1.4.2',
+        coreKtx                     : '1.9.0',
+        appCompatVersion            : '1.5.1',
         constraintLayoutVersion     : '2.1.4',
         pagingVersion               : '3.1.1',
         materialVersion             : '1.6.1',
@@ -16,8 +16,8 @@ ext.versions = [
         hiltVersion                 : '2.42',
         glideVersion                : '4.13.0',
         coroutinesVersion           : '1.6.2',
-        navigationVersion           : '2.4.2',
-        lifecycleVersion            : '2.4.1',
+        navigationVersion           : '2.5.2',
+        lifecycleVersion            : '2.5.1',
         lifecycleExtVersion         : '2.2.0',
 
         retrofitVersion             : '2.9.0',
